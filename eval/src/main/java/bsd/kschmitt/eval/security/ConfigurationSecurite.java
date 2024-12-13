@@ -25,7 +25,7 @@ import java.util.List;
 public class ConfigurationSecurite {
 
     @Autowired
-    AppUserDetails appUserDetailsService;
+    UserDetailsService appUserDetailsService;
 
     @Autowired
     BCryptPasswordEncoder encoder;
@@ -36,7 +36,7 @@ public class ConfigurationSecurite {
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService((UserDetailsService) appUserDetailsService);
+        authenticationProvider.setUserDetailsService(appUserDetailsService);
         authenticationProvider.setPasswordEncoder(encoder);
         return authenticationProvider;
     }

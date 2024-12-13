@@ -21,7 +21,6 @@ public class SalarieController {
     @Autowired
     private ConventionRepository conventionRepository;
 
-    // Add a new Salarie (with maximum limit check)
     @PostMapping
     public ResponseEntity<Salarie> addSalarie(@RequestBody Salarie salarie) {
         Convention convention = conventionRepository.findById(salarie.getConvention().getId()).orElse(null);
@@ -30,22 +29,19 @@ public class SalarieController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        // Check if the number of employees exceeds the limit
         if (convention.getSalaries().size() >= convention.getSalarieMaximum()) {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);  // HTTP 403 if limit reached
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
 
         Salarie savedSalarie = salarieRepository.save(salarie);
         return new ResponseEntity<>(savedSalarie, HttpStatus.CREATED);
     }
 
-    // Get all Salaries
     @GetMapping
     public List<Salarie> getAllSalaries() {
         return salarieRepository.findAll();
     }
 
-    // Get a specific Salarie by ID
     @GetMapping("/{id}")
     public ResponseEntity<Salarie> getSalarieById(@PathVariable Integer id) {
         return salarieRepository.findById(id)

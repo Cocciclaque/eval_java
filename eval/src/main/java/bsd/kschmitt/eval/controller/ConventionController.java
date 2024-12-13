@@ -17,27 +17,23 @@ public class ConventionController {
     @Autowired
     private ConventionRepository conventionRepository;
 
-    // Create a new Convention
     @PostMapping
     public ResponseEntity<Convention> createConvention(@RequestBody Convention convention) {
         Convention savedConvention = conventionRepository.save(convention);
         return new ResponseEntity<>(savedConvention, HttpStatus.CREATED);
     }
 
-    // Get all Conventions
     @GetMapping
     public List<Convention> getAllConventions() {
         return conventionRepository.findAll();
     }
 
-    // Get a specific Convention by ID
     @GetMapping("/{id}")
     public ResponseEntity<Convention> getConventionById(@PathVariable Integer id) {
         Optional<Convention> convention = conventionRepository.findById(id);
         return convention.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Update an existing Convention
     @PutMapping("/{id}")
     public ResponseEntity<Convention> updateConvention(@PathVariable Integer id, @RequestBody Convention updatedConvention) {
         if (!conventionRepository.existsById(id)) {
@@ -47,8 +43,6 @@ public class ConventionController {
         Convention savedConvention = conventionRepository.save(updatedConvention);
         return ResponseEntity.ok(savedConvention);
     }
-
-    // Delete a Convention
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteConvention(@PathVariable Integer id) {
         if (!conventionRepository.existsById(id)) {

@@ -7,8 +7,6 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<Users, Integer> {
 
-    static Users findByEmail(String email) {
-        return null;
-    }
+    Users findByEmail(String email);
 
 }

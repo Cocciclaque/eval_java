@@ -27,6 +27,7 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.CONFLICT);  // HTTP 409
         }
         User savedUser = UserRepository.save(User);
+        System.out.println(savedUser);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 

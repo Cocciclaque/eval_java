@@ -26,6 +26,7 @@ public class SalarieController {
     public ResponseEntity<Salarie> addSalarie(@RequestBody Salarie salarie) {
         Convention convention = conventionRepository.findById(salarie.getConvention().getId()).orElse(null);
         if (convention == null) {
+
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 

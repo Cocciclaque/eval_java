@@ -53,6 +53,4 @@ public class User {
     @JoinColumn(name = "entreprise_id")
     private Entreprise entreprise;
 
-
-
 }

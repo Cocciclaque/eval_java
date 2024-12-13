@@ -1,5 +1,8 @@
 package bsd.kschmitt.eval.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -26,7 +29,12 @@ public class Convention {
 
     @ManyToOne
     @JoinColumn(name = "entreprise_id", nullable = false)
+    @JsonIgnoreProperties("conventions")
     private Entreprise entreprise;
+
+    @OneToMany(mappedBy = "convention", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("conventions")
+    private List<Salarie> salaries;
 
     public Integer getId() {
         return id;
@@ -76,7 +84,5 @@ public class Convention {
         this.salaries = salaries;
     }
 
-    @OneToMany(mappedBy = "convention", cascade = CascadeType.ALL)
-    private List<Salarie> salaries;
 
 }

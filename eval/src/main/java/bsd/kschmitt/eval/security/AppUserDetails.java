@@ -1,31 +1,33 @@
 package bsd.kschmitt.eval.security;
 
+import bsd.kschmitt.eval.model.Users;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.List;
 
+@Component
 public class AppUserDetails implements UserDetails {
+    private final Users user;
 
-    private final User user;
-
-    public AppUserDetails(User User) {
-        this.user = User;
+    public AppUserDetails(Users Users) {
+        this.user = Users;
     }
 
-    public User getUser() {
+    public Users getUser() {
         return user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-        
+        String role;
 
-        return List.of(new SimpleGrantedAuthority("ROLE_" + user.se));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
     }
 
     @Override
@@ -35,7 +37,7 @@ public class AppUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return user.getEmail();
     }
 
     @Override
@@ -57,4 +59,5 @@ public class AppUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }

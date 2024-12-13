@@ -24,11 +24,11 @@ public class Entreprise {
         this.nom = nom;
     }
 
-    public List<User> getUsers() {
+    public List<Users> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(List<Users> users) {
         this.users = users;
     }
 
@@ -48,7 +48,7 @@ public class Entreprise {
     private String nom;
 
     @OneToMany(mappedBy = "entreprise", cascade = CascadeType.ALL)
-    private List<User> users;
+    private List<Users> users;
 
     @OneToMany(mappedBy = "entreprise", cascade = CascadeType.ALL)
     private List<Convention> conventions;

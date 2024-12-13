@@ -1,10 +1,9 @@
 package bsd.kschmitt.eval.controller;
 
-import bsd.kschmitt.eval.model.User;
+import bsd.kschmitt.eval.model.Users;
 import bsd.kschmitt.eval.security.AppUserDetails;
 import bsd.kschmitt.eval.security.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.naming.AuthenticationException;
 
 @RestController
 @CrossOrigin
@@ -26,7 +23,7 @@ public class ConnexionController {
     AuthenticationProvider authenticationProvider;
 
     @PostMapping("/connexion")
-    public ResponseEntity<String> connexion(@RequestBody User User) {
+    public ResponseEntity<String> connexion(@RequestBody Users User) {
 
         AppUserDetails appUserDetails = (AppUserDetails) authenticationProvider
                 .authenticate(

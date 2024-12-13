@@ -1,9 +1,14 @@
 package bsd.kschmitt.eval.repository;
 
-import bsd.kschmitt.eval.model.User;
+import bsd.kschmitt.eval.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Integer> {
+import java.util.Optional;
 
-    User findByEmail(String email);
+public interface UserRepository extends JpaRepository<Users, Integer> {
+
+    static Users findByEmail(String email) {
+        return null;
+    }
+
 }

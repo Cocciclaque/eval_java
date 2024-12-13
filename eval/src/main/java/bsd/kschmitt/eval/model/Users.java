@@ -2,9 +2,17 @@ package bsd.kschmitt.eval.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-public class User {
+@Getter
+@Setter
+public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,6 +66,5 @@ public class User {
     @JoinColumn(name = "entreprise_id")
     private Entreprise entreprise;
 
-    private String role;
 
 }

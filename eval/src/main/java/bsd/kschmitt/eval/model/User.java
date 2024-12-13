@@ -38,6 +38,11 @@ public class User {
         return entreprise;
     }
 
+    public String getRole(){
+        if(this.getEntreprise() == null) return "admin";
+        return "entreprise";
+    }
+
     public void setEntreprise(Entreprise entreprise) {
         this.entreprise = entreprise;
     }
@@ -52,5 +57,7 @@ public class User {
     @OneToOne
     @JoinColumn(name = "entreprise_id")
     private Entreprise entreprise;
+
+    private String role;
 
 }
